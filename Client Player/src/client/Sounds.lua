@@ -63,6 +63,8 @@ function sounds:Epic()
 end
 
 function sounds.Build()
+	if (#sound_service.ActiveSounds:GetChildren() > 10) then return end
+
 	local sound = sound_service.Build:Clone()
 	sound.Parent = sound_service.ActiveSounds
 

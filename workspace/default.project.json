@@ -3,34 +3,58 @@
   "tree": {
     "$className": "DataModel",
 
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Server": {
+        "$path": "source/server"
+      }
+    },
+
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "Modules": {
+        "$path": "source/storage"
+      }
+    },
+
     "ReplicatedFirst": {
       "$className": "ReplicatedFirst",
-      "$path": "src/first"
+      "$path": "source/first"
+    },
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Common": {
+        "$path": "source/shared"
+      },
+      "Remotes": {
+        "$path": "assets/remotes"
+      }
     },
 
     "SoundService": {
       "$className": "SoundService",
-      "$path": "src/sound"
+      "$path": "assets/sound"
     },
 
     "StarterGui": {
       "$className": "StarterGui",
-      "$path": "src/interface"
+      "$path": "assets/interface"
     },
 
     "StarterPlayer": {
       "$className": "StarterPlayer",
       "StarterCharacter": {
-        "$path": "src/Models/StarterCharacter.rbxmx"
+        "$path": "assets/Models/StarterCharacter.rbxmx"
       },
       "StarterCharacterScripts": {
         "$className": "StarterCharacterScripts",
-        "$path": "src/character"
+        "$path": "assets/character"
       },
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
         "Client": {
-          "$path": "src/client"
+          "$path": "source/client"
         }
       }
     }

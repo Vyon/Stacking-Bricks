@@ -1,0 +1,38 @@
+{
+  "name": "Stacking Bricks",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedFirst": {
+      "$className": "ReplicatedFirst",
+      "$path": "src/first"
+    },
+
+    "SoundService": {
+      "$className": "SoundService",
+      "$path": "src/sound"
+    },
+
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$path": "src/interface"
+    },
+
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterCharacter": {
+        "$path": "src/Models/StarterCharacter.rbxmx"
+      },
+      "StarterCharacterScripts": {
+        "$className": "StarterCharacterScripts",
+        "$path": "src/character"
+      },
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Client": {
+          "$path": "src/client"
+        }
+      }
+    }
+  }
+}
