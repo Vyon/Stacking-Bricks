@@ -32,7 +32,7 @@ end
 
 function session:Play()
 	if (self.State ~= 'Playing' or not self.isActive and (self.Cooldown == 0 or os.time() > self.Cooldown)) then return end
-	self.Cooldown = os.time() + .4
+	self.Cooldown = os.time() + .5
 
 	-- Variables
 	local reduce_chance = self.Data.Reduce_Fall_Chance
