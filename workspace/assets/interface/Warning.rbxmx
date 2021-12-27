@@ -2,7 +2,7 @@
 	<Meta name="ExplicitAutoJoints">true</Meta>
 	<External>null</External>
 	<External>nil</External>
-	<Item class="ScreenGui" referent="RBXDE0E63DCECCF4CF48C47DAE9A767EFD1">
+	<Item class="ScreenGui" referent="RBX4C9F80CE01D545AAA60D11315B950482">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="AutoLocalize">true</bool>
@@ -16,7 +16,7 @@
 			<BinaryString name="Tags"></BinaryString>
 			<token name="ZIndexBehavior">1</token>
 		</Properties>
-		<Item class="Frame" referent="RBXF6DB2524CB004C4A861BFA25727CAF61">
+		<Item class="Frame" referent="RBX144E0A5C88F941799C9AF31BA9E4211D">
 			<Properties>
 				<bool name="Active">false</bool>
 				<Vector2 name="AnchorPoint">
@@ -70,7 +70,7 @@
 				<bool name="Visible">true</bool>
 				<int name="ZIndex">1</int>
 			</Properties>
-			<Item class="TextLabel" referent="RBX591150AF429E47DB88F6EF4044529A9C">
+			<Item class="TextLabel" referent="RBXBC032DEBC5FD446CAB21A4425CC710B9">
 				<Properties>
 					<bool name="Active">false</bool>
 					<Vector2 name="AnchorPoint">
@@ -146,7 +146,7 @@
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="UITextSizeConstraint" referent="RBX5FFBA980570241969E5782899A1DD025">
+				<Item class="UITextSizeConstraint" referent="RBX4DAB62DD234147B3B7DFC014B5E92F61">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<int name="MaxTextSize">30</int>
@@ -157,7 +157,7 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextLabel" referent="RBXF989598ABBF542A8AC3F651A0A92EB11">
+			<Item class="TextLabel" referent="RBX06FD4102DF124CCAA1C38F1F5C5D9B08">
 				<Properties>
 					<bool name="Active">false</bool>
 					<Vector2 name="AnchorPoint">
@@ -233,7 +233,7 @@
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="UITextSizeConstraint" referent="RBX871AF6CB3249493D9002D253573CD1D2">
+				<Item class="UITextSizeConstraint" referent="RBXC021DBEC82E34B8E91C1D8B1B17FFE69">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<int name="MaxTextSize">30</int>
@@ -244,7 +244,7 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX8CFC1184CB774C70B60E8C879676828B">
+			<Item class="TextButton" referent="RBXF2AE82C04E6F43A4BF32F8E58F2AB630">
 				<Properties>
 					<bool name="Active">true</bool>
 					<Vector2 name="AnchorPoint">
@@ -302,7 +302,7 @@
 					<int64 name="SourceAssetId">-1</int64>
 					<token name="Style">0</token>
 					<BinaryString name="Tags"></BinaryString>
-					<string name="Text">Leave game</string>
+					<string name="Text">Continue?</string>
 					<Color3 name="TextColor3">
 						<R>1</R>
 						<G>1</G>
@@ -324,7 +324,7 @@
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="UICorner" referent="RBX3A40BFD3F1D34CA88F6318AEF2B2E513">
+				<Item class="UICorner" referent="RBX36A5F7AB171A464E869ADA9724FC126B">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<UDim name="CornerRadius">
@@ -336,7 +336,7 @@
 						<BinaryString name="Tags"></BinaryString>
 					</Properties>
 				</Item>
-				<Item class="UITextSizeConstraint" referent="RBX51795DC65E4B4456919D8D58438A591C">
+				<Item class="UITextSizeConstraint" referent="RBXBCB48F7789154AE4A08DC03E1FC3F09E">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<int name="MaxTextSize">20</int>
@@ -348,38 +348,39 @@
 				</Item>
 			</Item>
 		</Item>
-		<Item class="LocalScript" referent="RBX5F81AD34BDBF4DD5B89CF1749C3ABF68">
+		<Item class="LocalScript" referent="RBX4CABB39C497D4F8DA2DAE9EED4F6B736">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
 				<string name="Name">Controller</string>
-				<string name="ScriptGuid">{AD370F76-0404-439E-9AFC-7C2746CC259A}</string>
+				<string name="ScriptGuid">{55E72070-79CD-4209-9C9D-E21873185647}</string>
 				<ProtectedString name="Source"><![CDATA[repeat task.wait() until game:IsLoaded()
 
 local main = script.Parent
 local main_frame = main.MainFrame
 local exit = main_frame.Exit
 
-local connection; connection = exit.MouseButton1Down:Connect(function()
-	game:GetService('Players').LocalPlayer:Kick('Have a wonderful rest of your day/night :)')
-end)
+-- Private Functions
+local function OnReady(connection)
+	local tween = game:GetService('TweenService'):Create(main_frame, TweenInfo.new(2), { BackgroundTransparency = 1 })
+	tween:Play()
 
-task.wait(10)
+	for i, v in ipairs(main_frame:GetChildren()) do
+		v:Destroy()
+	end
 
-local tween = game:GetService('TweenService'):Create(main_frame, TweenInfo.new(2), { BackgroundTransparency = 1 })
-tween:Play()
+	tween.Completed:Wait()
 
-for i, v in ipairs(main_frame:GetChildren()) do
-	v:Destroy()
+	connection:Disconnect()
+	main:Destroy()
+
+	game:GetService('ReplicatedStorage').Remotes.OnReady:FireServer()
 end
 
-tween.Completed:Wait()
-
-connection:Disconnect()
-main:Destroy()
-
-game:GetService('ReplicatedStorage').Remotes.OnReady:FireServer()]]></ProtectedString>
+local connection; connection = exit.MouseButton1Down:Connect(function()
+	OnReady(connection)
+end)]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 			</Properties>
