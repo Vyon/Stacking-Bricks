@@ -31,7 +31,8 @@ function session:Start()
 end
 
 function session:Play()
-	if (self.State ~= 'Playing' or not self.isActive) then return end
+	if (self.State ~= 'Playing' or not self.isActive and (self.Cooldown == 0 or os.time() > self.Cooldown)) then return end
+	self.Cooldown = os.time() + .4
 
 	-- Variables
 	local reduce_chance = self.Data.Reduce_Fall_Chance
@@ -109,6 +110,8 @@ function session:Upgrade(enum: number)
 	}
 
 	if (self.Data.Bricks >= upgrade_cost) then
+		if (not formulas[upgrade]) then return end
+
 		self.Data.Bricks -= upgrade_cost --> Remove the players "bricks"
 
 		formulas[upgrade](upgrade_cost, self.Data[upgrade])
@@ -135,6 +138,7 @@ return {
 		self.Data = data
 		self.Player = player
 		self.Signal = signal.New()
+		self.Cooldown = 0
 
 		self.Signal:Connect(function(render_item)
 			render:FireClient(self.Player, render_item)

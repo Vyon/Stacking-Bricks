@@ -44,11 +44,13 @@ local shop_toggled = false
 
 -- Private Functions
 local function CreatePart()
+	local total = #parts:GetChildren()
+
 	local part = Instance.new('Part', parts)
-	part.Name = ''
+	part.Name = 'Brick_' .. total
 	part.BrickColor = BrickColor.Random()
 	part.Anchored = true
-	part.Position = Vector3.new(0, (part.Size.Y * #parts:GetChildren()))
+	part.Position = Vector3.new(0, (part.Size.Y * total))
 	part.CastShadow = false
 
 	local info = TweenInfo.new(.2, Enum.EasingStyle.Linear)
@@ -59,6 +61,10 @@ local function CreatePart()
 
 	local tween = tween_service:Create(camera, info, { CFrame = destination })
 	tween:Play()
+
+	tween.Completed:Wait()
+
+	return part
 end
 
 local function UpdateDataElements(payload: table)
@@ -85,7 +91,7 @@ end
 local function UpdateSessionElements(payload: table)
 	elements.status.Text = payload.Status
 	elements.chance.Text = string.format('Chance to Fall: %.1f%%', payload.Chance)
-	elements.height.Text = string.format('Stack\'s height: %d', suffix(payload.Height))
+	elements.height.Text = string.format('Stack\'s height: %s', suffix(payload.Height))
 end
 
 -- On Init
